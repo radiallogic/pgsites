@@ -11,8 +11,8 @@ services:
   #     - 6379:6379
   #   networks:
   #     - pgsites-network
-  pgsites:
-    container_name: pgsites
+  main:
+    container_name: main
     build:
       context: ./
       dockerfile: Dockerfile
@@ -27,19 +27,22 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
     networks:
       - pgsites-network
-#   mongodb:
-#     image: mongo:latest
-#     container_name: pgsites-mongodb
-#     ports:
-#       - "27017:27017"
-#     volumes:
-#       - mongodb-data:/data/db
-#     networks:
-#       - pgsites-network
+
+  db:
+    image: postgres
+    container_name: db
+    env_file:
+      - ./.env.local
+    ports: 
+      - "5432:5432"
+    volumes:
+      - postgres-data:/data/db
+    networks:
+      - pgsites-network
 
 
-# volumes:
-#   mongodb-data:
+volumes:
+  postgres-data:
 
 networks:
   pgsites-network:
