@@ -1,7 +1,6 @@
 "use client" 
 
 import React, { useState } from "react";
-import { WindRose } from "./components/WindRose"
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
@@ -10,22 +9,21 @@ export default async function Home() {
   const [generateButton, setGenerateButton] = useState(false);
 
   return (
-    <>
-
-<Button variant="outlined">Login</Button><Button variant="outlined">Register</Button>
-
-    <TextField
-          required
-          id="outlined-required"
-          label="Required"
-          defaultValue="Hello World"
-        />
-        <Button variant="outlined">Search</Button>
-
+<>
+        <div className="col-start-2 row-start-2">
+          <TextField
+            required
+            id="outlined-required"
+            label="Required"
+            defaultValue="Search Sites"
+          />
+          <Button variant="outlined">Search</Button>
+        </div>
 
 
-        {/* <List /> */}
-
-    </>
+        <div className="col-start-2 row-start-3">
+          {/* <List /> */}
+        </div>
+</>
   );
 }

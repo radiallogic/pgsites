@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+
+import { useSession, signIn, signOut } from "next-auth/react"
+
 import "./globals.css";
 
 const geistSans = localFont({
@@ -23,13 +28,47 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const { data: session } = useSession()
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+
+<div className="grid grid-cols-2 grid-rows-3 gap-4">
+      <div className="col-start-2 row-start-1"> PARAGLIDING SITES APP</div>
+        <div className="col-start-3"> 
+
+            <Button variant="outlined">Login</Button><Button variant="outlined">Register</Button>
+        </div>
+
         {children}
+
+        </div>
       </body>
     </html>
   );
 }
+
+
+
+
+
+export default function Component() {
+  
+  if (session) {
+    return (
+      <>
+        Signed in as {session.user.email} <br />
+        <button onClick={() => signOut()}>Sign out</button>
+      </>
+    )
+  }
+  return (
+    <>
+      Not signed in <br />
+      <button onClick={() => signIn()}>Sign in</button>
+    </>
+  )
