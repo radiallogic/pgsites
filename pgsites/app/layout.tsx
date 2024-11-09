@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+import Link from 'next/link'
 
-import { useSession, signIn, signOut } from "next-auth/react"
+import { useSession, signOut } from "next-auth/react"
 
 import "./globals.css";
 
@@ -41,7 +41,18 @@ export default function RootLayout({
       <div className="col-start-2 row-start-1"> PARAGLIDING SITES APP</div>
         <div className="col-start-3"> 
 
-            <Button variant="outlined">Login</Button><Button variant="outlined">Register</Button>
+        {session && (
+          <>
+            Signed in as {session.user!.email} <br />
+            <button onClick={() => signOut()}>Sign out</button>
+          </>
+        )}
+
+        {session! && (
+          <>  
+            <Link href="\login"> <Button variant="outlined">Login</Button></Link><Button variant="outlined">Register</Button>
+          </>
+        )}    
         </div>
 
         {children}
@@ -51,24 +62,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-
-
-
-
-export default function Component() {
-  
-  if (session) {
-    return (
-      <>
-        Signed in as {session.user.email} <br />
-        <button onClick={() => signOut()}>Sign out</button>
-      </>
-    )
-  }
-  return (
-    <>
-      Not signed in <br />
-      <button onClick={() => signIn()}>Sign in</button>
-    </>
-  )
