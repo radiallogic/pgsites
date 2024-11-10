@@ -1,25 +1,29 @@
 
+import React, { useState, useEffect } from "react";
 
-export type Option = {label: string, value: any}
-
-async function useSiteOption(){
+import {Site, AutoCompleteOption} from "@/app/coreTypes"
 
 
-    const response = await fetch('api\sites');
-    if (!response.ok) {
-        throw new Error(`Error: ${response.statusText}`);
-    }
-    console.log(response);
+function useSiteOptions():AutoCompleteOption[] {
 
-    const json = await response.json()
-    
-    let output = []
-    for(let i=0; i < json.length; i++ ){
-        output.push({label: json[i].name, value: json[i].value})
-    }
+    const [data, setData] = useState<Site[]>([]);
+
+    useEffect( () => { 
+      fetch('/api/sites')
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data)
+      }) 
+    }, [])
+
+    const output = data.map( (value, index) => {
+      return {label: value.name, value: value.id}
+    })
+
+    //console.log("output: ", output)
 
     return output;
 }   
 
 
-export default useSiteOption
+export default useSiteOptions

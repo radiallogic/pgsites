@@ -1,35 +1,30 @@
+"use client"
 import React from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
  
 
-import { signIn } from "@/auth"
+import { signIn, signOut, useSession } from "next-auth/react";
  
 const GoogleSignIn = () => {
+  const handle = async () => {
+    await signIn("google")
+  }
+
   return (
-    <form
-      action={async () => {
-        "use server"
-        await signIn("google")
-      }}
-    >
-      <button type="submit">Signin with Google</button>
-    </form>
+    <Button onClick={handle}>Signin with Google</Button>
   )
 } 
 
 const FacebookSignIn = () => {
+  const handle = async () => {
+    await signIn("facebook")
+  }
+
   return (
-    <form
-      action={async () => {
-        "use server"
-        await signIn("facebook")
-      }}
-    >
-      <button type="submit">Signin with Facebook</button>
-    </form>
+    <Button onClick={handle}>Signin with facebook</Button>
   )
-}
+} 
 
 export default function LoginPage() {
   return (

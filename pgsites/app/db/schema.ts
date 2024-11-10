@@ -21,8 +21,8 @@ export const sites = pgTable('sites', {
   id: serial('id').primaryKey(),           
   name: varchar('name', { length: 255 }),
   memberStatus: varchar({ length: 255 }), 
-  directionStart: integer(),
-  directionEnd: integer(),
+  windDegStart: integer(),
+  windDegEnd: integer(),
 
   rating: varchar({ length: 255 }).notNull(), // Not enum because it might have cp +10
   location: point('location', { mode: 'xy' }).notNull(),

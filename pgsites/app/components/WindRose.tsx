@@ -1,19 +1,7 @@
 "use client" 
 import React, { useState, useEffect, useRef } from "react";
 
-enum rating {
-    pilot,
-    cp,
-    ap,
-}
-
-type Site = {
-    windDegStart: number,
-    windDegEnd: number
-    name: string,
-    rating: rating
-    xcOnly: boolean
-} 
+import {Site} from '@/app/coreTypes';
 
 // Function to check if two wind ranges overlap
 const rangesOverlap = (startA: number, endA: number, startB: number, endB: number): boolean => {
