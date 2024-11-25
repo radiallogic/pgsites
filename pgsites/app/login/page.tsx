@@ -2,6 +2,7 @@
 import React from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import { useRouter } from 'next/router';
  
 
 import { signIn, signOut, useSession } from "next-auth/react";
@@ -27,13 +28,20 @@ const FacebookSignIn = () => {
 } 
 
 export default function LoginPage() {
+
   return (
     <div className="col-start-2 row-start-2">
+      <div>
       <TextField required id="outlined-required" label="Login" />
       <TextField required id="outlined-required" label="Password" />
+      </div>
+      <div>
 
       <GoogleSignIn />
+      </div>
+      <div>
       <FacebookSignIn />
+      </div>
       
     </div>
   );
